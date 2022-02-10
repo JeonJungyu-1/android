@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "687586596568",
+    "project_id": "fcmprac-517ce",
+    "storage_bucket": "fcmprac-517ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687586596568:android:7f109a0f8a49bc44fee9ad",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "687586596568-lcpbq6uhcqpimgovagti5sr8eu07gd7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMgirgof2XkSfzkCJoBxqmNzS00UTLJ6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "687586596568-lcpbq6uhcqpimgovagti5sr8eu07gd7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
