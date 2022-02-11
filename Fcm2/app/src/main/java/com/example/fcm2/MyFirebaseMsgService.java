@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -15,20 +14,68 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.Map;
+
 public class MyFirebaseMsgService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        Log.d("1", "나나나나" + remoteMessage.getNotification().getBody());
+//        Log.d("5", "getNotification() : " + remoteMessage.getNotification().getTag());
+//        Log.d("6", "getData : " + remoteMessage.getData());
 
         if (remoteMessage != null) {
-            sendNotification(remoteMessage.getNotification());
+            if (remoteMessage.getData() != null) {
+                sendNotification(remoteMessage.getData());
+            } else {
+//                sendNotification(remoteMessage.getNotification(), remoteMessage.getData());
+            }
         }
+
     }
 
-    private void sendNotification(RemoteMessage.Notification notification) {
+    //백그라운드 고려 x
+//    private void sendNotification(RemoteMessage.Notification notification, Map<String, String> data) {
+//        Intent notificationIntent = new Intent(this, MainActivity.class);
+//        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        NotificationCompat.Builder builder = getNotificationBuilder(notificationManager, "channel id", "첫번째 채널");
+//
+//
+//
+//        if (data.get("pushGubun").equals("1")) {
+//            builder.setContentTitle(notification.getTitle())
+//                    .setContentText(notification.getBody())
+//                    .setContentInfo(notification.getTag())
+//                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                    .setContentIntent(pendingIntent)
+//                    .setAutoCancel(true);
+//
+//            notificationManager.notify(notification.getTag(),1, builder.build());
+//
+//        } else if (data.get("pushGubun").equals("2")) {
+//
+//            String bigText = "20449-20489/com.example.fcm2 V/FA: Inactivity, disconnecting from the service";
+//
+//
+//            builder.setContentTitle(notification.getTitle())
+//                    .setContentText(bigText)
+//                    .setStyle(new NotificationCompat.BigTextStyle().bigText(bigText))
+//                    .setContentInfo(notification.getTag())
+//                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                    .setContentIntent(pendingIntent)
+//                    .setAutoCancel(true);
+//
+//            notificationManager.notify(2, builder.build());
+//
+//        }
+//
+//    }
+    //백그라운드 고려 O
+    private void sendNotification(Map<String, String> data) {
         Intent notificationIntent = new Intent(this, MainActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -36,16 +83,55 @@ public class MyFirebaseMsgService extends FirebaseMessagingService {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = getNotificationBuilder(notificationManager, "channel id", "첫번째 채널");
 
-        builder.setContentTitle(notification.getTitle())
-                .setContentText(notification.getBody())
-                .setContentInfo(notification.getTag())
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
 
 
-        notificationManager.notify(notification.getTag(), 1234, builder.build());
+        if (data.get("pushGubun").equals("1")) {
+            builder.setContentTitle(data.get("title"))
+                    .setContentText(data.get("body"))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+
+            notificationManager.notify(data.get("tag"),1, builder.build());
+
+        } else if (data.get("pushGubun").equals("2")) {
+
+            String bigText = "20449-20489/com.example.fcm2 V/FA: Inactivity, disconnecting from the service";
+
+
+            builder.setContentTitle(data.get("title"))
+                    .setContentText(bigText)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(bigText))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+
+            notificationManager.notify(2, builder.build());
+
+        }
+
     }
+
+//    private void sendNotification(RemoteMessage.Notification notification, Map<String, String> data) {
+//        Intent notificationIntent = new Intent(this, MainActivity.class);
+//        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        NotificationCompat.Builder builder = getNotificationBuilder(notificationManager, "channel id", "첫번째 채널");
+//
+//        builder.setContentTitle(notification.getTitle())
+//                .setContentText(notification.getBody())
+//                .setContentInfo(notification.getTag())
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                .setContentIntent(pendingIntent)
+//                .setAutoCancel(true);
+//
+//
+//
+////        notificationManager.notify(notification.getTag(), 1234, builder.build());
+//        notificationManager.notify(data.get("apple"), 1234, builder.build());
+//    }
 
     protected  NotificationCompat.Builder getNotificationBuilder(NotificationManager notificationManager, String channelId, CharSequence channelName) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
