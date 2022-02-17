@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="90"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="10"
+        android:weightSum="100">
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:layout_margin="5dp"
+            android:text="back"
+            android:clickable="false"/>
+        <Button
+            android:id="@+id/goBtn"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:text="go"
+            android:clickable="false"/>
+        <Button
+            android:id="@+id/reBtn"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:text="re"/>
+        <Button
+            android:id="@+id/homeBtn"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:text="home"/>
+
+    </LinearLayout>
+
+</LinearLayout>

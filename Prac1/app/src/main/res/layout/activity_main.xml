@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="123"
+        android:textSize="50dp"
+        android:layout_weight="90"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:weightSum="100">
+        <Button
+            android:id="@+id/webBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:layout_gravity="center"
+            android:text="web 이동"
+            android:textColor="@color/black"
+            android:backgroundTint="#FFFF33"
+            android:layout_marginHorizontal="10dp"/>
+        <Button
+            android:id="@+id/webBtn2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:layout_gravity="center"
+            android:text="dic 이동"
+            android:textColor="@color/black"
+            android:backgroundTint="#FFFF33"
+            android:layout_marginHorizontal="10dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
